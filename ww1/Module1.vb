@@ -3,7 +3,7 @@
         Public Sub ShowInfo()
             Console.WriteLine(SystemInformation.UserName)
             Console.WriteLine(SystemInformation.ComputerName)
-
+            '添加测试
         End Sub
 
 
