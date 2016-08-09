@@ -1,0 +1,6 @@
+LIBRARY
+EXPORTS
+;注释语句-vb调用C语言Dll此方法导出函数可以顺利调用
+add @1
+addp @2
+padd @3
