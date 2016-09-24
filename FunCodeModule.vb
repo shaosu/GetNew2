@@ -84,8 +84,37 @@ Module FunCode
         a = System.Runtime.InteropServices.Marshal.ReadInt32(p, 0)  '从地址获取值
         MessageBox.Show(a)
     End Sub
-
-
+    
+    ''' <summary>
+    '''  延迟，且响应事件,不卡，不占CPU
+    ''' </summary>
+    ''' <param name="ms"></param>
+    Public Sub Delay_DoEvents(ms As Long)
+        '  On Error Resume Next
+        '  不阻塞当前线程的消息循环。   
+        '   Dim __time As DateTime = DateTime.Now
+        '  Dim __Span As Int64 = ms * 10000   '因为时间是以100纳秒为单位。 
+        
+        '此方法不卡，也不占CPU
+        While (ms)
+            ms -= 1
+            System.Threading.Thread.Sleep(1)
+            Application.DoEvents()   '把权限交给系统，处理消息及事件
+            ' System.Threading.Thread.SpinWait(150000)
+        End While
+        
+        'Dim a As Action = AddressOf dosomething
+        'Dim t As New System.Threading.Tasks.Task(a)
+        't.Start()
+        'Dim dd As System.EventHandler
+        'dd = AddressOf dosomething
+        
+        '此方法，虽然不卡，但是占CPU很多
+        'While (DateTime.Now.Ticks - __time.Ticks < __Span)
+        '    Application.DoEvents()   '把权限交给系统，处理消息及事件
+        'End While
+        
+    End Sub
 
 
 End Module
